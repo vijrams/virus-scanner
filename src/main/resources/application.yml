@@ -1,0 +1,36 @@
+server:
+  #address:
+  port: 8080
+  sessionTimeout: 30
+#  ssl:
+#    client-auth: want
+#    key-store: keystore.jks
+#    key-store-password: datacert
+#    key-alias: cpqa-app01
+#    key-password: datacert
+#    protocol: TLS
+#    enabled-Protocols: [TLSv1.2]
+#    trust-store: truststore.jks
+#    trust-store-password: datacert
+  tomcat:
+    #default max-threads is 200
+    max-threads: 200
+    basedir: ./
+    access-log-enabled: true
+    access-log-pattern: "%h %l %u %t %r %s %b"
+#logging: defined in logback.xml
+#security:
+#  require-ssl: true
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 21MB
+app:
+  clamd-host: "localhost"
+  clamd-port: 3310
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info
