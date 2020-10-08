@@ -27,6 +27,39 @@ repositories {
 	}
 	mavenCentral()
 }
+bootJar {
+	mainClassName = 'com.wkelms.clamav.VirusScannerApplication'
+	exclude ("*.jks")
+	exclude ("*.yml*")
+	exclude ("*.xml")
+	exclude ("*.exe")
+}
+
+task dist(type: Copy, dependsOn: bootJar) {
+	def distDir = file ('build/dist/')
+	distDir.mkdir()
+	from 'build/libs'
+	into 'build/dist'
+	include "${project.name}-${project.version}.jar"
+	rename("${project.name}-${project.version}.jar","VirusScanner-${project.version}.jar")
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "https://nexus.wkelms.com/repository/cp-releases/") {
+				authentication(userName: "deployment", password: "datacert")
+			}
+			snapshotRepository(url: "https://nexus.wkelms.com/repository/cp-snapshots/") {
+				authentication(userName: "deployment", password: "datacert")
+			}
+			println "Uploading VirusScanner-$version to Nexus Repo"
+			pom.version = "$version"
+			pom.artifactId = "VirusScanner"
+			pom.groupId = "com.wkelms.clamav"
+		}
+	}
+}
 
 dependencies {
 	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.15'
