@@ -1,0 +1,24 @@
+stages:
+  - build
+  - publish
+before_script:
+
+build:
+  tags:
+    - cp-docker
+  stage: build
+  script:
+    - gradle clean build
+  artifacts:
+    expire_in: 1 week
+    when: on_failure
+    paths:
+    - build/reports/
+publish:
+  tags:
+    - cp-docker
+  stage: publish
+  script:
+    - gradle dist upload
+after_script:
+  - echo "End CI"
