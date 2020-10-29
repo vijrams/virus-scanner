@@ -40,11 +40,11 @@ class ScannerController {
                 @RequestParam(value = "file", required = true) MultipartFile file){
         try {
             ClamavClient client = new ClamavClient(host, port)
-            log.info("Scaning the $file.name for user $lawId")
+            log.info("Scaning the ${file?.getOriginalFilename()} for user $lawId")
             def r = client.scan(file.inputStream)
             return buildJsonResponse(r.status.toString(), r.foundViruses)
         }catch(Exception e){
-            log.error("Exception while scanning $file.name for user $lawId $e")
+            log.error("Exception while scanning ${file?.getOriginalFilename()} for user $lawId $e")
             return buildJsonResponse("ERROR", e.message)
         }
     }
