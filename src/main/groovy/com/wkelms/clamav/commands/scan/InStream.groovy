@@ -31,8 +31,9 @@ public class InStream extends ScanCommand {
 
     @Override
     public ScanResult send(InetSocketAddress server) {
+        SocketChannel socketChannel
         try {
-            SocketChannel socketChannel = SocketChannel.open(server)
+            socketChannel = SocketChannel.open(server)
             socketChannel.write(getRawCommand())
 
             // ByteBuffer order must be big-endian ( == network byte order)
@@ -58,6 +59,14 @@ public class InStream extends ScanCommand {
             return readResponse(socketChannel)
         } catch (IOException e) {
             throw new CommunicationException(e)
+        }
+        finally{
+            try {
+                if(socketChannel!=null)
+                    socketChannel.close()
+            }catch (Exception ex) {
+                log?.error("Error in Command send : " +ex?.stackTrace);
+            }
         }
     }
 }

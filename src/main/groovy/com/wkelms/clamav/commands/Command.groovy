@@ -18,13 +18,25 @@ public abstract class Command<T> {
     public abstract String getCommandString()
 
     public T send(InetSocketAddress server) {
+        SocketChannel socketChannel
         try {
-            SocketChannel socketChannel = SocketChannel.open(server)
+            log.debug("Before SocketChannel open in Command class")
+            socketChannel = SocketChannel.open(server)
+            log.debug("After SocketChannel open in Command class")
             socketChannel.write(getRawCommand())
+            log.debug("After SocketChannel write in Command class")
 
             return readResponse(socketChannel)
         } catch (IOException e) {
             throw new CommunicationException(e)
+        }
+        finally{
+            try {
+                if(socketChannel!=null)
+                    socketChannel.close()
+            }catch (Exception ex) {
+                log.error("Error in Command send : " +ex?.stackTrace);
+            }
         }
     }
 
