@@ -38,14 +38,26 @@ class ScannerController {
     @RequestMapping(value = "/scan", method= RequestMethod.POST, produces = "application/json" )
     public scan(@RequestParam(value = "lawId", required = true) String lawId,
                 @RequestParam(value = "file", required = true) MultipartFile file){
+        InputStream fileToScanStream = null
         try {
             ClamavClient client = new ClamavClient(host, port)
             log.info("Scaning the ${file?.getOriginalFilename()} for user $lawId")
-            def r = client.scan(file.inputStream)
+            fileToScanStream = file.getInputStream()
+            def r = client.scan(fileToScanStream)
             return buildJsonResponse(r.status.toString(), r.foundViruses)
         }catch(Exception e){
             log.error("Exception while scanning ${file?.getOriginalFilename()} for user $lawId $e")
             return buildJsonResponse("ERROR", e.message)
+        }
+        finally {
+            try {
+                if ( fileToScanStream != null ) {
+                    fileToScanStream.close()
+                }
+            }
+            catch(Exception ex) {
+                log.error("Exception while closing stream for ${file?.getOriginalFilename()} for user $lawId")
+            }
         }
     }
 
