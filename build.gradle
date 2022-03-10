@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.6.2'
+		springBootVersion = '2.6.4'
 	}
 	repositories {
 		mavenLocal()
@@ -15,13 +15,13 @@ buildscript {
 }
 
 plugins {
-	id 'org.springframework.boot' version '2.6.2'
+	id 'org.springframework.boot' version '2.6.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'groovy'
 }
 
 group = 'com.wkelms.scanner'
-version = '1.6.0'
+version = '1.6.1'
 sourceCompatibility = '1.8'
 
 repositories {
