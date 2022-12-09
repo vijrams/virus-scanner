@@ -1,0 +1,26 @@
+trigger:
+  branches:
+    include:
+    - '*'
+
+stages:
+- stage: build
+  displayName: Build Stage
+  jobs:
+  - job: build
+    pool:
+      name: GRC-ELM-CP-Build-Pool
+      demands:
+      - Agent.Name -equals cpbuild02
+    steps:
+    - task: CmdLine@2
+      continueOnError: true
+      inputs:
+        script: gradle clean build
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(System.DefaultWorkingDirectory)/build/reports/tests/test'
+        ArtifactName: 'results'
+        publishLocation: 'Container'
+        StoreAsTar: true
+        
