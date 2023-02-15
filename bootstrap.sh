@@ -75,6 +75,6 @@ else
                 clamav-milter &
         fi
 fi
-java -javaagent:/usr/local/glowroot/glowroot.jar -Dglowroot.agent.id=${AGENT_ID} -Dglowroot.collector.address=${COLLECTOR_ADDRESS} -jar /usr/local/app/VirusScanner.jar
+java -javaagent:/usr/local/glowroot/glowroot.jar -Dglowroot.agent.id=${AGENT_ID} -Dglowroot.collector.address=${COLLECTOR_ADDRESS} -DLOGGING_PATH=${LOGGING_PATH} -DLOGGING_FILE=${LOGGING_FILE} -jar /usr/local/app/VirusScanner.jar
 
 
