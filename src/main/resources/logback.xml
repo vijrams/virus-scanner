@@ -2,7 +2,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
-    <property name="LOG_FILE" value="logs/vs_service.log"/>
+    <property name="LOG_FILE" value="/ext/passport/logs/vs_service.log"/>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_FILE}</file>
 
