@@ -1,4 +1,4 @@
-from clamav/clamav:0.105.2
+from clamav/clamav:0.104.0
 ARG version=11.0.16.9.1
 
 # Please note that the THIRD-PARTY-LICENSE could be out of date if the base image has been updated recently. 
