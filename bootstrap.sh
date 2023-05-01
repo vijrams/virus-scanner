@@ -43,11 +43,11 @@ else
 
         if [ "${CLAMAV_NO_CLAMD:-false}" != "true" ]; then
                 echo "Starting ClamAV"
-                if [ -S "/run/clamav/clamd.sock" ]; then
-                        unlink "/run/clamav/clamd.sock"
+                if [ -S "/tmp/clamd.sock" ]; then
+                        unlink "/tmp/clamd.sock"
                 fi
                 clamd &
-                while [ ! -S "/run/clamav/clamd.sock" ]; do
+                while [ ! -S "/tmp/clamd.sock" ]; do
                         if [ "${_timeout:=0}" -gt "${CLAMD_STARTUP_TIMEOUT:=180}" ]; then
                                 echo
                                 echo "Failed to start clamd"
