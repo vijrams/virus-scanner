@@ -48,7 +48,7 @@ else
                 fi
                 clamd &
                 while [ ! -S "/run/clamav/clamd.sock" ]; do
-                        if [ "${_timeout:=0}" -gt "${CLAMD_STARTUP_TIMEOUT:=1800}" ]; then
+                        if [ "${_timeout:=0}" -gt "${CLAMD_STARTUP_TIMEOUT:=180}" ]; then
                                 echo
                                 echo "Failed to start clamd"
                                 exit 1
