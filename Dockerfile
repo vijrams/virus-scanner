@@ -28,6 +28,7 @@ COPY ./glowroot/ /usr/local/glowroot/
 COPY ./build/dist/VirusScanner*.jar /usr/local/app/VirusScanner.jar
 COPY ./bootstrap.sh /usr/local/app
 RUN chmod 777 /usr/local/app/bootstrap.sh
+RUN sed -i 's/#MaxFileSize 400M/MaxFileSize 150M/' /etc/clamav/clamd.conf
 EXPOSE 3000
 
 ENTRYPOINT ["./usr/local/app/bootstrap.sh"]
