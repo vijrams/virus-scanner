@@ -32,7 +32,7 @@ RUN apk add --no-cache &&\
 	apk add bind-tools
 
 
-ls ./build/dist
+RUN echo $(ls -1 ./build/dist)
 
 COPY ./build/dist/VirusScanner*.jar /usr/local/app/VirusScanner.jar
 COPY ./bootstrap.sh /usr/local/app
