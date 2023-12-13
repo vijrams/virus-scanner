@@ -3,8 +3,7 @@ ARG version=17-jdk
 
 RUN wget -O /etc/apk/keys/adoptium.rsa.pub https://packages.adoptium.net/artifactory/api/security/keypair/public/repositories/apk && \
     echo 'https://packages.adoptium.net/artifactory/apk/alpine/main' >> /etc/apk/repositories && \
-    apk add temurin-17-jdk 
-
+    apk add temurin-=$version-r0
 
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm
 ENV PATH=$PATH:/usr/lib/jvm/default-jvm/bin
@@ -31,8 +30,6 @@ RUN apk add --no-cache &&\
 	apk add iputils &&\
 	apk add bind-tools
 
-
-RUN echo $(ls -1 ./build/dist)
 
 COPY ./build/dist/VirusScanner*.jar /usr/local/app/VirusScanner.jar
 COPY ./bootstrap.sh /usr/local/app
