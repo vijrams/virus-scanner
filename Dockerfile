@@ -31,6 +31,9 @@ RUN apk add --no-cache &&\
 	apk add iputils &&\
 	apk add bind-tools
 
+
+ls /build/dist
+
 COPY ./build/dist/VirusScanner*.jar /usr/local/app/VirusScanner.jar
 COPY ./bootstrap.sh /usr/local/app
 RUN chmod 777 /usr/local/app/bootstrap.sh
