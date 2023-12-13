@@ -25,6 +25,19 @@ RUN mkdir -p /usr/local/glowroot
 RUN chmod 777 /usr/local/glowroot
 COPY ./glowroot/ /usr/local/glowroot/
 
+#Installing Network Tools
+RUN apk add --no-cache &&\
+    apk add net-tools &&\
+    apk add netcat-openbsd &&\
+	apk add busybox-extras &&\
+    apk add util-linux &&\
+	apk add traceroute &&\
+	apk add tcpdump &&\
+	apk add procps-ng &&\
+	apk add psmisc &&\
+	apk add iputils &&\
+	apk add bind-tools
+
 COPY ./build/dist/VirusScanner*.jar /usr/local/app/VirusScanner.jar
 COPY ./bootstrap.sh /usr/local/app
 RUN chmod 777 /usr/local/app/bootstrap.sh
