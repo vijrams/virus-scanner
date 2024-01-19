@@ -21,7 +21,7 @@ plugins {
 }
 
 group = 'com.wkelms.scanner'
-version = '2.2.0-snapshot'
+version = '2.2.0'
 java {
 	sourceCompatibility = '17'
 	targetCompatibility = '17'
