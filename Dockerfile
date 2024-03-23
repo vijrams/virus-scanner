@@ -1,4 +1,4 @@
-from clamav/clamav:1.0.5
+from clamav/clamav:1.0.5-48
 
 RUN wget -O /etc/apk/keys/adoptium.rsa.pub https://packages.adoptium.net/artifactory/api/security/keypair/public/repositories/apk && \
     echo 'https://packages.adoptium.net/artifactory/apk/alpine/main' >> /etc/apk/repositories && \
