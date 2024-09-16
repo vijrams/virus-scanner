@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '3.2.5'
+		springBootVersion = '3.2.9'
 	}
 	repositories {
 		mavenLocal()
@@ -15,13 +15,13 @@ buildscript {
 }
 
 plugins {
-	id 'org.springframework.boot' version '3.2.5'
+	id 'org.springframework.boot' version '3.2.9'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'groovy'
 }
 
 group = 'com.wkelms.scanner'
-version = '2.2.1'
+version = '2.2.2'
 java {
 	sourceCompatibility = '17'
 	targetCompatibility = '17'
@@ -64,7 +64,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}"){
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
 	}
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: "${springBootVersion}"
+	implementation("org.springframework.boot:spring-boot-starter-undertow:${springBootVersion}"){
+		exclude group: 'io.undertow', module: 'undertow-core'
+	}
+	implementation group: 'io.undertow', name: 'undertow-core', version: '2.3.17.Final'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: "${springBootVersion}"
 	implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.21.1'
 	implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
